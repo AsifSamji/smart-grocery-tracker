@@ -1,0 +1,112 @@
+/* =========================
+   ADD GROCERY ITEM (UX FORM)
+========================= */
+
+.add-item-wrapper {
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 16px;
+  max-width: 640px;
+  margin-top: 10px;
+
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  animation: slideIn 0.4s ease;
+}
+
+.add-item-wrapper h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.form-subtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+/* Form Layout */
+.add-item-form {
+  display: grid;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+/* Inputs */
+.add-item-form input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.add-item-form input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+/* Price + Quantity Row */
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Date Group */
+.date-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.date-group label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+}
+
+/* Button */
+.add-item-form button {
+  margin-top: 10px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-item-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(37, 99, 235, 0.4);
+}
+
+/* Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 600px) {
+  .add-item-wrapper {
+    padding: 24px;
+  }
+
+  .input-row {
+    grid-template-columns: 1fr;
+  }
+}

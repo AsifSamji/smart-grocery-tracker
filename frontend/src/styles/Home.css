@@ -1,0 +1,134 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Header */
+.home-header {
+  text-align: center;
+  padding: 60px 20px 30px;
+}
+
+.home-header h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  background: linear-gradient(90deg, #6a11cb, #2575fc);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 10px;
+}
+
+.home-header p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #666;
+}
+
+/* Card Grid */
+.home-page .card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+  padding: 40px 20px 80px;
+  max-width: 1200px;
+  margin: auto;
+  perspective: 1200px;
+}
+
+/* Card */
+.home-page .card {
+  height: 280px;
+  background: linear-gradient(135deg, #ffffff, #f2f6ff);
+  border-radius: 20px;
+  padding: 30px 20px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: all 0.4s ease;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Icon */
+.home-page .card .icon {
+  font-size: 3rem;
+  transform: translateZ(40px);
+}
+
+/* Text */
+.home-page .card h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.home-page .card p {
+  font-size: 0.95rem;
+  color: #555;
+  max-width: 90%;
+  line-height: 1.4;
+}
+
+/* Glow Effect */
+.home-page .card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(100, 150, 255, 0.35),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: 0.6s;
+}
+
+.home-page .card:hover::before {
+  transform: translateX(100%);
+}
+
+/* 3D Hover */
+.home-page .card:hover {
+  transform: translateY(-15px) rotateX(7deg) rotateY(-7deg) scale(1.05);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+}
+
+/* Disabled Card */
+.home-page .card.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.home-page .card.disabled:hover {
+  transform: none;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile Optimization */
+@media (max-width: 480px) {
+  .home-page .card {
+    height: 260px;
+    padding: 25px 15px;
+  }
+
+  .home-page .card .icon {
+    font-size: 2.5rem;
+  }
+
+  .home-page .card h3 {
+    font-size: 1.25rem;
+  }
+
+  .home-page .card p {
+    font-size: 0.9rem;
+  }
+}
