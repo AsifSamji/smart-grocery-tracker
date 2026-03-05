@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import API from "../services/api";
 import "../styles/register.css";
 
 const Register = () => {
@@ -17,7 +17,7 @@ const Register = () => {
 
   const registerUser = async () => {
     try {
-      await axios.post("http://localhost:5000/api/auth/register", form);
+      await API.post("/auth/register", form);
       alert("Registered successfully");
       navigate("/login");
     } catch (err) {
@@ -52,7 +52,6 @@ const Register = () => {
 
         <button onClick={registerUser}>Register</button>
 
-        {/* NEW ADDITION */}
         <p className="login-text">
           Already have an account?
           <span onClick={() => navigate("/login")}> Login</span>

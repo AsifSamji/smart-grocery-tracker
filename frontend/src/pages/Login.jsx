@@ -1,4 +1,4 @@
-import axios from "axios";
+import API from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "../styles/auth.css";
@@ -10,10 +10,10 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        { email, password }
-      );
+      const res = await API.post("/auth/login", {
+        email,
+        password,
+      });
 
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
@@ -42,7 +42,6 @@ const Login = () => {
 
         <button onClick={handleLogin}>Login</button>
 
-        {/* NEW ADDITION ONLY */}
         <p className="register-text">
           Don’t have an account?
           <span onClick={() => navigate("/register")}> Register</span>
