@@ -18,13 +18,18 @@ const GroceryList = () => {
     },
   };
 
+  // ⭐ BACKEND URL
+  const API = "https://smart-grocery-tracker-wg6t.onrender.com/api";
+
   // 🔄 FETCH ITEMS
   const fetchItems = async () => {
-    const res = await axios.get(
-      "http://localhost:5000/api/items",
-      authHeader
-    );
-    setItems(res.data);
+    try {
+      const res = await axios.get(`${API}/items`, authHeader);
+      setItems(res.data);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to load items");
+    }
   };
 
   useEffect(() => {
@@ -35,12 +40,13 @@ const GroceryList = () => {
   const deleteItem = async (id) => {
     if (!window.confirm("Delete item?")) return;
 
-    await axios.delete(
-      `http://localhost:5000/api/items/${id}`,
-      authHeader
-    );
-
-    fetchItems();
+    try {
+      await axios.delete(`${API}/items/${id}`, authHeader);
+      fetchItems();
+    } catch (err) {
+      console.error(err);
+      alert("Delete failed");
+    }
   };
 
   // ✏️ EDIT
@@ -59,19 +65,24 @@ const GroceryList = () => {
       return;
     }
 
-    await axios.put(
-      `http://localhost:5000/api/items/${editId}`,
-      { name, quantity, unit, expireDate },
-      authHeader
-    );
+    try {
+      await axios.put(
+        `${API}/items/${editId}`,
+        { name, quantity, unit, expireDate },
+        authHeader
+      );
 
-    setEditId(null);
-    setName("");
-    setQuantity("");
-    setUnit("pcs");
-    setExpireDate("");
+      setEditId(null);
+      setName("");
+      setQuantity("");
+      setUnit("pcs");
+      setExpireDate("");
 
-    fetchItems();
+      fetchItems();
+    } catch (err) {
+      console.error(err);
+      alert("Update failed");
+    }
   };
 
   return (
@@ -146,23 +157,38 @@ const GroceryList = () => {
                 {editId === item._id ? (
                   <>
                     <button
-                      style={{ background: "green", color: "white", marginRight: 5 }}
+                      style={{
+                        background: "green",
+                        color: "white",
+                        marginRight: 5,
+                      }}
                       onClick={updateItem}
                     >
                       Save
                     </button>
-                    <button onClick={() => setEditId(null)}>Cancel</button>
+
+                    <button onClick={() => setEditId(null)}>
+                      Cancel
+                    </button>
                   </>
                 ) : (
                   <>
                     <button
-                      style={{ background: "orange", color: "white", marginRight: 5 }}
+                      style={{
+                        background: "orange",
+                        color: "white",
+                        marginRight: 5,
+                      }}
                       onClick={() => editItem(item)}
                     >
                       Edit
                     </button>
+
                     <button
-                      style={{ background: "red", color: "white" }}
+                      style={{
+                        background: "red",
+                        color: "white",
+                      }}
                       onClick={() => deleteItem(item._id)}
                     >
                       Delete

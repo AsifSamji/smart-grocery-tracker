@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import API from "../services/api";
 import "../styles/GroceryAdd.css";
 
 const GroceryAdd = () => {
@@ -11,30 +11,29 @@ const GroceryAdd = () => {
     expireDate: "",
   });
 
-  const token = localStorage.getItem("token");
-
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.post(
-      "http://localhost:5000/api/items",
-      form,
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+    try {
+      await API.post("/items", form);
 
-    alert("Item Added Successfully ✅");
+      alert("Item Added Successfully ✅");
 
-    // reset form
-    setForm({
-      name: "",
-      quantity: "",
-      unit: "pcs",
-      purchaseDate: "",
-      expireDate: "",
-    });
+      // reset form
+      setForm({
+        name: "",
+        quantity: "",
+        unit: "pcs",
+        purchaseDate: "",
+        expireDate: "",
+      });
+    } catch (err) {
+      console.log(err);
+      alert("Failed to add item");
+    }
   };
 
   return (
