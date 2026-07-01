@@ -19,7 +19,7 @@ const GroceryList = () => {
   };
 
   // ⭐ BACKEND URL
-  const API = "https://smart-grocery-tracker-wg6t.onrender.com/api";
+  const API = "https://smart-grocery-tracker-eight.vercel.app/api";
 
   // 🔄 FETCH ITEMS
   const fetchItems = async () => {
